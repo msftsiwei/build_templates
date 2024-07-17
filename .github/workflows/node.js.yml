@@ -16,16 +16,25 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        os:
+        - ubuntu-latest
+        - windows-latest
+        node-version:
+        - 22
+        - 20
+        - 18
+        - 16
+        - 14
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v4
     
-    - name: Set up Node.js \${{ matrix.node-version }}
+    - name: Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: \${{ matrix.node-version }}
+        node-version: ${{ matrix.node-version }}
+        check-latest: true
         
     - name: Install dependencies with npm or pnpm
       run: |
