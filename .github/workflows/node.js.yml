@@ -88,4 +88,5 @@ jobs:
           echo "No test script found in package.json."
           exit 1
         fi
+      shell: bash
 
