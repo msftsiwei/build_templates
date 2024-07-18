@@ -73,7 +73,7 @@ jobs:
     
     - name: Test
       run: |
-        if [ -f "package.json" ] && [ "$(node -p "require('package.json').scripts && require('package.json').scripts.test")" ]; then
+        if [ -f "package.json" ] && [ "$(node -p "require('./package.json').scripts && require('./package.json').scripts.test")" ]; then
           echo "Test script found in package.json."
           cat "package.json"
           if [ -f "package-lock.json" ]; then
