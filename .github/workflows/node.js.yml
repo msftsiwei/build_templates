@@ -35,7 +35,22 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         check-latest: true
-        
+      
+    - name: Search for package.json
+      id: search-package-json
+      run: |
+        # Search for package.json file in the repository
+        PACKAGE_JSON_PATH=$(find . -name 'package.json' | head -n 1)
+        if [ -z "$PACKAGE_JSON_PATH" ]; then
+          echo "No package.json found"
+          exit 1
+        fi
+        echo "package_json_path=$(dirname "$PACKAGE_JSON_PATH")" >> $GITHUB_ENV
+
+      shell: bash
+
+    - name: Run npm install
+      
     - name: Check for package-lock.json
       run: |
         if [ ! -f package-lock.json ]; then
@@ -45,7 +60,8 @@ jobs:
           echo "package-lock.json found, proceeding with install..."
           npm ci
         fi
-        
+      working-directory: ${{ env.package_json_path }}
+
     - name: Install dependencies with npm or pnpm
       run: |
         if [ -f package-lock.json ]; then
@@ -59,7 +75,8 @@ jobs:
           echo "Proceeding with dependency installation..."
           npm ci
         fi
-        
+      working-directory: ${{ env.package_json_path }}
+      
     - name: Build
       run: |
         if [ -f package-lock.json ]; then
@@ -70,7 +87,8 @@ jobs:
           echo "Lock file not found. Cannot run build scripts."
           exit 1
         fi
-    
+      working-directory: ${{ env.package_json_path }}
+      
     - name: Test
       run: |
         if [ -f "package.json" ] && [ "$(node -e "const pkg = require('./package.json'); console.log(pkg.scripts && pkg.scripts.test ? true : false);")" = "true" ]; then
@@ -89,4 +107,4 @@ jobs:
           exit 0
         fi
       shell: bash
-
+      working-directory: ${{ env.package_json_path }}
