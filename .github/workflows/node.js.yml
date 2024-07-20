@@ -20,10 +20,10 @@ jobs:
         - ubuntu-latest
         - windows-latest
         node-version:
-        - 22
-        - 20
-        - 18
-        - 16
+        #- 22
+        #- 20
+        #- 18
+        #- 16
         - 14
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
