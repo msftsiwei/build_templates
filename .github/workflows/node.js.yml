@@ -15,15 +15,16 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         os:
         - ubuntu-latest
         - windows-latest
         node-version:
         #- 22
-        #- 20
-        #- 18
-        #- 16
+        - 20
+        - 18
+        - 16
         - 14
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -114,3 +115,4 @@ jobs:
         fi
       shell: bash
       working-directory: ${{ env.package_json_path }}
+
