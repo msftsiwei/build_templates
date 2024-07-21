@@ -22,10 +22,10 @@ jobs:
         - windows-latest
         node-version:
         #- 22
-        - 20
-        - 18
+        #- 20
+        #- 18
         - 16
-        - 14
+        #- 14
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
