@@ -24,14 +24,14 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest-xl
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
         os:
-        - ubuntu-latest-xl
-        #- windows-latest-xl
+        - ubuntu-latest
+        #- windows-latest
         python-version: ["3.12"]
 
     steps:
